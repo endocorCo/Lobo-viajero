@@ -497,66 +497,58 @@
 
     /* ── SERVICES ── */
     .services-bg { background: var(--white); }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; margin-top: 60px;
+
+    .services-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 80px;
+      margin-top: 64px;
     }
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--gray-light);
-      border-radius: var(--radius-lg);
-      padding: 36px 30px;
-      position: relative; overflow: hidden;
-      transition: transform 0.36s cubic-bezier(0.25,0.46,0.45,0.94),
-                  box-shadow 0.36s cubic-bezier(0.25,0.46,0.45,0.94),
-                  border-color 0.3s;
-      cursor: default;
+
+    .service-item {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--gray-light);
+      display: flex;
+      flex-direction: column;
     }
-    .service-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--blue-mid), var(--blue));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.36s cubic-bezier(0.25,0.46,0.45,0.94);
+
+    .service-item:nth-child(-n+2) {
+      border-top: 1px solid var(--gray-light);
     }
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-xl);
-      border-color: rgba(30,111,192,0.25);
+
+    .service-item-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px; font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
     }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-card-icon {
-      width: 60px; height: 60px;
-      background: linear-gradient(135deg, rgba(30,111,192,0.12), rgba(26,95,168,0.08));
-      border: 1.5px solid rgba(30,111,192,0.2);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; margin-bottom: 22px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .service-card:hover .service-card-icon {
-      transform: scale(1.1);
-      box-shadow: 0 8px 24px rgba(30,111,192,0.2);
-    }
-    .service-card h3 {
+
+    .service-item-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 21px; font-weight: 800;
-      color: var(--text-dark); margin-bottom: 10px;
-      letter-spacing: 0.2px;
+      font-size: 27px; font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.0;
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+      transition: color 0.22s ease;
     }
-    .service-card p {
+
+    .service-item:hover .service-item-name { color: var(--orange); }
+
+    .service-item-desc {
       font-size: 14.5px; line-height: 1.65;
       color: var(--text-muted);
+      flex: 1;
     }
-    .service-tag {
+
+    .service-item-tag {
       display: inline-block;
       margin-top: 16px;
-      font-size: 11px; font-weight: 700;
+      font-size: 10px; font-weight: 700;
       color: var(--orange);
-      background: rgba(30,111,192,0.08);
-      border: 1px solid rgba(30,111,192,0.18);
-      padding: 4px 10px; border-radius: 50px;
-      letter-spacing: 0.5px; text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     /* ── WHY US ── */
@@ -628,8 +620,8 @@
 
     .why-row {
       display: grid;
-      grid-template-columns: 40px 30px 1fr;
-      gap: 0 16px;
+      grid-template-columns: 44px 1fr;
+      gap: 0 20px;
       padding: 32px 0;
       align-items: start;
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -1066,7 +1058,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-list { gap: 0 48px; }
       .why-header-split { gap: 32px; }
       .why-main-split { grid-template-columns: 260px 1fr; gap: 60px; }
       .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1084,7 +1076,9 @@
       .nav-links, .nav-phone { display: none; }
       .hamburger { display: flex; }
       .section-pad { padding: 72px 0; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-list { grid-template-columns: 1fr; }
+      .service-item:nth-child(-n+2) { border-top: none; }
+      .service-item:first-child { border-top: 1px solid var(--gray-light); }
       .why-header-split { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
       .why-main-split { grid-template-columns: 1fr; gap: 44px; }
       .why-anchor { position: static; }
@@ -1115,7 +1109,7 @@
   <nav id="mainNav">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">
-        <div class="nav-logo-icon">🚚</div>
+        <div class="nav-logo-icon"><svg width="22" height="15" viewBox="0 0 22 15" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="12" height="9" rx="1.5"/><path d="M13 4h5.5L21 8v5h-8V4z"/><circle cx="4.5" cy="13" r="1.8"/><circle cx="17" cy="13" r="1.8"/></svg></div>
         <div class="nav-logo-text">
           <span class="nav-logo-name">FLETES XOCHIMILCO</span>
           <span class="nav-logo-sub">Sitio Autorizado #913</span>
@@ -1128,9 +1122,7 @@
         <li><a href="#ubicacion">Ubicación</a></li>
         <li><a href="https://wa.me/5520994239?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="nav-cta">Cotizar por WhatsApp</a></li>
       </ul>
-      <a href="tel:5520994239" class="nav-phone">
-        <span>📞</span> 55 2099 4239
-      </a>
+      <a href="tel:5520994239" class="nav-phone">55 2099 4239</a>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
@@ -1142,8 +1134,8 @@
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#testimonios">Testimonios</a>
     <a href="#ubicacion">Ubicación y contacto</a>
-    <a href="https://wa.me/5520994239?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="mobile-cta">💬 Cotizar por WhatsApp ahora</a>
-    <a href="tel:5520994239" style="text-align:center; color: rgba(255,255,255,0.7); font-size:14px; margin-top:4px;">📞 55 2099 4239</a>
+    <a href="https://wa.me/5520994239?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="mobile-cta">Cotizar por WhatsApp ahora</a>
+    <a href="tel:5520994239" style="text-align:center; color: rgba(255,255,255,0.7); font-size:14px; margin-top:4px;">55 2099 4239</a>
   </div>
 
   <!-- HERO -->
@@ -1157,15 +1149,9 @@
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z" fill="currentColor"/></svg>
             Sitio Autorizado #913
           </span>
-          <span class="hero-badge">
-            🏢 Oficinas Establecidas
-          </span>
-          <span class="hero-badge">
-            ⚡ Atención Inmediata
-          </span>
-          <span class="hero-badge">
-            🗺️ Cobertura CDMX
-          </span>
+          <span class="hero-badge">Oficinas Establecidas</span>
+          <span class="hero-badge">Atención Inmediata</span>
+          <span class="hero-badge">Cobertura CDMX</span>
         </div>
         <h1 class="hero-title reveal delay-1">
           Fletes y mudanzas<br/>
@@ -1181,7 +1167,7 @@
             Cotizar por WhatsApp
           </a>
           <a href="tel:5520994239" class="btn-secondary">
-            📞 Llamar ahora
+            Llamar ahora
           </a>
         </div>
         <div class="hero-stats reveal delay-4">
@@ -1214,7 +1200,9 @@
               <div class="pulse-sub">Lunes a Sábado</div>
             </div>
           </div>
-          <span class="truck-icon-big">🚛</span>
+          <div style="text-align:center; margin-bottom:20px; opacity:0.15;">
+            <svg width="120" height="72" viewBox="0 0 120 72" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="68" height="44" rx="3"/><path d="M70 20h28l16 18v20H70V20z"/><circle cx="22" cy="62" r="8"/><circle cx="88" cy="62" r="8"/><line x1="30" y1="62" x2="80" y2="62"/></svg>
+          </div>
           <div class="hero-card-title">Servicio profesional certificado</div>
           <ul class="hero-feature-list">
             <li>Mudanzas residenciales y de oficina</li>
@@ -1240,7 +1228,7 @@
   <div class="trust-bar">
     <div class="trust-bar-inner">
       <div class="trust-item reveal">
-        <div class="trust-icon">🏛️</div>
+        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0zm3.5 7.5L8 11 5.5 8.5l1.1-1.1L8 8.8l2.4-2.4z"/></svg></div>
         <div class="trust-text">
           <strong>Sitio Autorizado</strong>
           <span>Registro #913 oficial</span>
@@ -1248,7 +1236,7 @@
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-1">
-        <div class="trust-icon">🏢</div>
+        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="white" stroke-width="1.4"><rect x="1" y="0" width="14" height="20" rx="1"/><rect x="3.5" y="3" width="3" height="3"/><rect x="9.5" y="3" width="3" height="3"/><rect x="3.5" y="8" width="3" height="3"/><rect x="9.5" y="8" width="3" height="3"/><rect x="5.5" y="13" width="5" height="7"/></svg></div>
         <div class="trust-text">
           <strong>Oficinas Establecidas</strong>
           <span>Xochimilco, CDMX</span>
@@ -1256,7 +1244,7 @@
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-2">
-        <div class="trust-icon">⭐</div>
+        <div class="trust-icon"><svg width="20" height="19" viewBox="0 0 20 19" fill="white"><path d="M10 0l2.35 7.22H20l-6.17 4.48 2.35 7.22L10 14.44l-6.18 4.48 2.36-7.22L0 7.22h7.65z"/></svg></div>
         <div class="trust-text">
           <strong>4.6 Estrellas Google</strong>
           <span>Calificación verificada</span>
@@ -1264,7 +1252,7 @@
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-3">
-        <div class="trust-icon">⚡</div>
+        <div class="trust-icon"><svg width="13" height="20" viewBox="0 0 13 20" fill="white"><path d="M7.5 0H2.5L0 10h5L3 20l10-13H7.5z"/></svg></div>
         <div class="trust-text">
           <strong>Cotización inmediata</strong>
           <span>Respuesta en minutos</span>
@@ -1272,7 +1260,7 @@
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-4">
-        <div class="trust-icon">🗺️</div>
+        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0C3.6 0 0 3.6 0 8c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg></div>
         <div class="trust-text">
           <strong>Toda la CDMX</strong>
           <span>Sur y zona metropolitana</span>
@@ -1289,42 +1277,42 @@
         <h2 class="section-title">Todo lo que necesitas<br/>para tu <em>traslado</em></h2>
         <p class="section-body">Servicio profesional y confiable para cada tipo de mudanza o flete en Xochimilco y toda la Ciudad de México.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card reveal delay-1">
-          <div class="service-card-icon">🏡</div>
-          <h3>Mudanzas Residenciales</h3>
-          <p>Trasladamos tu hogar con el mayor cuidado. Empaque, carga y entrega profesional de todos tus bienes con total seguridad.</p>
-          <span class="service-tag">Más solicitado</span>
+      <div class="services-list">
+        <div class="service-item reveal delay-1">
+          <div class="service-item-num">01</div>
+          <div class="service-item-name">Mudanzas Residenciales</div>
+          <p class="service-item-desc">Trasladamos tu hogar con el mayor cuidado. Empaque, carga y entrega profesional de todos tus bienes con total seguridad.</p>
+          <span class="service-item-tag">Más solicitado</span>
         </div>
-        <div class="service-card reveal delay-2">
-          <div class="service-card-icon">🏢</div>
-          <h3>Mudanzas de Oficina</h3>
-          <p>Reubicación de empresas con mínimo tiempo de inactividad. Equipo de cómputo, mobiliario y archivos tratados con protocolo.</p>
-          <span class="service-tag">Corporativo</span>
+        <div class="service-item reveal delay-2">
+          <div class="service-item-num">04</div>
+          <div class="service-item-name">Traslado de Mercancía</div>
+          <p class="service-item-desc">Transporte seguro de mercancía comercial e industrial. Manejo especializado, puntualidad garantizada y seguimiento en ruta.</p>
+          <span class="service-item-tag">Comercial</span>
         </div>
-        <div class="service-card reveal delay-3">
-          <div class="service-card-icon">🚛</div>
-          <h3>Fletes Locales CDMX</h3>
-          <p>Fletes puntuales dentro de Xochimilco y toda la Ciudad de México. Respuesta rápida y precios competitivos al instante.</p>
-          <span class="service-tag">Xochimilco</span>
+        <div class="service-item reveal delay-2">
+          <div class="service-item-num">02</div>
+          <div class="service-item-name">Mudanzas de Oficina</div>
+          <p class="service-item-desc">Reubicación de empresas con mínimo tiempo de inactividad. Equipo de cómputo, mobiliario y archivos tratados con protocolo.</p>
+          <span class="service-item-tag">Corporativo</span>
         </div>
-        <div class="service-card reveal delay-1">
-          <div class="service-card-icon">📦</div>
-          <h3>Traslado de Mercancía</h3>
-          <p>Transporte seguro de mercancía comercial e industrial. Manejo especializado, puntualidad garantizada y seguimiento en ruta.</p>
-          <span class="service-tag">Comercial</span>
+        <div class="service-item reveal delay-3">
+          <div class="service-item-num">05</div>
+          <div class="service-item-name">Servicio Urgente</div>
+          <p class="service-item-desc">¿Necesitas un flete hoy mismo? Contamos con disponibilidad para emergencias y traslados urgentes con respuesta inmediata.</p>
+          <span class="service-item-tag">Disponible hoy</span>
         </div>
-        <div class="service-card reveal delay-2">
-          <div class="service-card-icon">⚡</div>
-          <h3>Servicio Urgente</h3>
-          <p>¿Necesitas un flete hoy mismo? Contamos con disponibilidad para emergencias y traslados urgentes con respuesta inmediata.</p>
-          <span class="service-tag">Disponible hoy</span>
+        <div class="service-item reveal delay-3">
+          <div class="service-item-num">03</div>
+          <div class="service-item-name">Fletes Locales CDMX</div>
+          <p class="service-item-desc">Fletes puntuales dentro de Xochimilco y toda la Ciudad de México. Respuesta rápida y precios competitivos al instante.</p>
+          <span class="service-item-tag">Xochimilco</span>
         </div>
-        <div class="service-card reveal delay-3">
-          <div class="service-card-icon">📅</div>
-          <h3>Recolección Programada</h3>
-          <p>Agenda tu servicio con anticipación. Recogida y entrega en el día y horario que más te convengan, sin complicaciones.</p>
-          <span class="service-tag">Flexible</span>
+        <div class="service-item reveal delay-4">
+          <div class="service-item-num">06</div>
+          <div class="service-item-name">Recolección Programada</div>
+          <p class="service-item-desc">Agenda tu servicio con anticipación. Recogida y entrega en el día y horario que más te convengan, sin complicaciones.</p>
+          <span class="service-item-tag">Flexible</span>
         </div>
       </div>
     </div>
@@ -1357,14 +1345,13 @@
           <div class="why-anchor-score">4.6</div>
           <div class="why-anchor-score-label">Calificación verificada<br/>en Google Maps</div>
           <p class="why-anchor-statement">Esa calificación no se compra, se gana con servicio real y consistente.</p>
-          <a href="tel:5520994239" class="btn-primary">📞 Hablar con nosotros</a>
+          <a href="tel:5520994239" class="btn-primary">Hablar con nosotros</a>
         </div>
 
         <!-- Right: reasons as ruled rows -->
         <div class="why-rows">
           <div class="why-row reveal delay-1">
             <div class="why-row-num">01</div>
-            <div class="why-row-icon">🏛️</div>
             <div>
               <div class="why-row-title">Sitio Autorizado #913</div>
               <p class="why-row-body">Contamos con registro oficial que respalda la legalidad y seriedad de nuestra operación frente a cualquier cliente.</p>
@@ -1372,7 +1359,6 @@
           </div>
           <div class="why-row reveal delay-2">
             <div class="why-row-num">02</div>
-            <div class="why-row-icon">🏢</div>
             <div>
               <div class="why-row-title">Oficinas Establecidas</div>
               <p class="why-row-body">Tenemos una dirección física en Xochimilco. No somos una empresa fantasma: puedes venir a vernos personalmente.</p>
@@ -1380,7 +1366,6 @@
           </div>
           <div class="why-row reveal delay-3">
             <div class="why-row-num">03</div>
-            <div class="why-row-icon">⚡</div>
             <div>
               <div class="why-row-title">Respuesta Rápida</div>
               <p class="why-row-body">Respondemos en minutos por WhatsApp o teléfono. Tu tiempo importa y no te hacemos esperar para darte una cotización.</p>
@@ -1388,7 +1373,6 @@
           </div>
           <div class="why-row reveal delay-4">
             <div class="why-row-num">04</div>
-            <div class="why-row-icon">🤝</div>
             <div>
               <div class="why-row-title">Atención Personalizada</div>
               <p class="why-row-body">Cada mudanza o flete es distinto. Adaptamos el servicio a tus necesidades específicas con trato directo y humano.</p>
@@ -1396,7 +1380,6 @@
           </div>
           <div class="why-row reveal delay-5">
             <div class="why-row-num">05</div>
-            <div class="why-row-icon">🗺️</div>
             <div>
               <div class="why-row-title">Cobertura en CDMX</div>
               <p class="why-row-body">Operamos en Xochimilco y toda la Ciudad de México. Sur de CDMX, Centro y zona metropolitana sin problema.</p>
@@ -1404,7 +1387,6 @@
           </div>
           <div class="why-row reveal delay-6">
             <div class="why-row-num">06</div>
-            <div class="why-row-icon">🛡️</div>
             <div>
               <div class="why-row-title">Cuidado en Cada Traslado</div>
               <p class="why-row-body">Tratamos tus pertenencias como si fueran nuestras. Empaque cuidadoso y manejo profesional en cada servicio.</p>
@@ -1426,27 +1408,27 @@
       </div>
       <div class="steps-track">
         <div class="step reveal delay-1">
-          <div class="step-num"><span class="step-icon">💬</span></div>
+          <div class="step-num">01</div>
           <h3>Contáctanos</h3>
           <p>Escríbenos por WhatsApp o llámanos. Atendemos rápido sin burocracia.</p>
         </div>
         <div class="step reveal delay-2">
-          <div class="step-num"><span class="step-icon">💰</span></div>
+          <div class="step-num">02</div>
           <h3>Cotizamos</h3>
           <p>Te damos un precio claro, sin letra pequeña ni costos ocultos.</p>
         </div>
         <div class="step reveal delay-3">
-          <div class="step-num"><span class="step-icon">📅</span></div>
+          <div class="step-num">03</div>
           <h3>Agendamos</h3>
           <p>Elegimos juntos el día y hora que más te convenga.</p>
         </div>
         <div class="step reveal delay-4">
-          <div class="step-num"><span class="step-icon">📦</span></div>
+          <div class="step-num">04</div>
           <h3>Recogemos</h3>
           <p>Llegamos puntual, cargamos con cuidado y aseguramos todo correctamente.</p>
         </div>
         <div class="step reveal delay-5">
-          <div class="step-num"><span class="step-icon">✅</span></div>
+          <div class="step-num">05</div>
           <h3>Entregamos</h3>
           <p>Tu traslado llega completo, a tiempo y en perfectas condiciones.</p>
         </div>
@@ -1465,35 +1447,35 @@
       <div class="coverage-grid">
         <div class="coverage-zones reveal">
           <div class="zone-card">
-            <div class="zone-icon">🏛️</div>
+            <div class="zone-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0z"/></svg></div>
             <div class="zone-info">
               <strong>Xochimilco</strong>
               <span>Zona principal de operación — servicio inmediato disponible</span>
             </div>
           </div>
           <div class="zone-card">
-            <div class="zone-icon">🌆</div>
+            <div class="zone-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="white" stroke-width="1.4"><rect x="1" y="1" width="16" height="16" rx="2"/><path d="M5 7h8M5 11h5"/></svg></div>
             <div class="zone-info">
               <strong>Sur de CDMX</strong>
               <span>Tlalpan, Tláhuac, Milpa Alta, Iztapalapa y más</span>
             </div>
           </div>
           <div class="zone-card">
-            <div class="zone-icon">🗺️</div>
+            <div class="zone-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.4"><circle cx="10" cy="10" r="9"/><path d="M10 1c-2 3-3 6-3 9s1 6 3 9M10 1c2 3 3 6 3 9s-1 6-3 9M1 10h18"/></svg></div>
             <div class="zone-info">
               <strong>Ciudad de México completa</strong>
               <span>Las 16 alcaldías cubiertas — traslados dentro de CDMX</span>
             </div>
           </div>
           <div class="zone-card">
-            <div class="zone-icon">🚀</div>
+            <div class="zone-icon"><svg width="13" height="20" viewBox="0 0 13 20" fill="white"><path d="M7.5 0H2.5L0 10h5L3 20l10-13H7.5z"/></svg></div>
             <div class="zone-info">
               <strong>Servicio urgente</strong>
               <span>Disponible en Xochimilco y Sur CDMX con alta prioridad</span>
             </div>
           </div>
           <a href="https://wa.me/5520994239?text=Hola,%20quiero%20saber%20si%20tienen%20cobertura%20en%20mi%20zona" target="_blank" class="btn-primary" style="margin-top:8px; justify-content:center; text-decoration:none;">
-            💬 ¿Llegas a mi zona? Consúltanos
+            ¿Llegas a mi zona? Consúltanos
           </a>
         </div>
         <div class="coverage-map-placeholder reveal-right">
@@ -1534,11 +1516,11 @@
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text">Excelente servicio. Llegaron a tiempo, cuidaron todos mis muebles con cobertores y no tuve ningún daño. Ya los recomendé con mis vecinos de Xochimilco.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">👩</div>
+            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">M</div>
             <div class="testimonial-author-info">
               <strong>María G.</strong>
               <span>Mudanza residencial • Xochimilco</span>
-              <div class="testimonial-verified">✔ Reseña verificada en Google</div>
+              <div class="testimonial-verified">Reseña verificada en Google</div>
             </div>
           </div>
         </div>
@@ -1547,11 +1529,11 @@
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text">Contraté el flete con poco tiempo de anticipación y respondieron al momento. El precio fue justo y el equipo fue muy profesional. 100% recomendados.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">👨</div>
+            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">R</div>
             <div class="testimonial-author-info">
               <strong>Roberto C.</strong>
               <span>Flete urgente • Sur CDMX</span>
-              <div class="testimonial-verified">✔ Reseña verificada en Google</div>
+              <div class="testimonial-verified">Reseña verificada en Google</div>
             </div>
           </div>
         </div>
@@ -1560,11 +1542,11 @@
           <div class="testimonial-stars">★★★★☆</div>
           <p class="testimonial-text">Hicimos la mudanza de nuestra oficina sin interrumpir operaciones. Muy organizados, cuidadosos con el equipo y muy buen precio para lo que incluye.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">👩‍💼</div>
+            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">D</div>
             <div class="testimonial-author-info">
               <strong>Daniela R.</strong>
               <span>Mudanza de oficina • Iztapalapa</span>
-              <div class="testimonial-verified">✔ Reseña verificada en Google</div>
+              <div class="testimonial-verified">Reseña verificada en Google</div>
             </div>
           </div>
         </div>
@@ -1592,28 +1574,28 @@
       <div class="location-grid">
         <div class="location-info">
           <div class="location-detail reveal delay-1">
-            <div class="location-detail-icon">📍</div>
+            <div class="location-detail-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0C3.6 0 0 3.6 0 8c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg></div>
             <div>
               <strong>Dirección de oficinas</strong>
               <span>Av. de La Noria, Paseos del Sur,<br/>Xochimilco, 16010 Ciudad de México, CDMX</span>
             </div>
           </div>
           <div class="location-detail reveal delay-2">
-            <div class="location-detail-icon">📞</div>
+            <div class="location-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M4 0C2 0 0 2 0 4c0 8.8 7.2 16 16 16 2 0 4-2 4-4v-3l-5-2-1.5 1.5C12 11 9 8 7.5 6.5L9 5 7 0H4z"/></svg></div>
             <div>
               <strong>Teléfono y WhatsApp</strong>
               <span><a href="tel:5520994239" style="color:var(--orange); font-weight:700; text-decoration:none;">55 2099 4239</a></span>
             </div>
           </div>
           <div class="location-detail reveal delay-3">
-            <div class="location-detail-icon">🏛️</div>
+            <div class="location-detail-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0zm3.5 7.5L8 11 5.5 8.5l1.1-1.1L8 8.8l2.4-2.4z"/></svg></div>
             <div>
               <strong>Registro oficial</strong>
               <span>Sitio Autorizado #913 con oficinas establecidas</span>
             </div>
           </div>
           <div class="location-detail reveal delay-4">
-            <div class="location-detail-icon">⭐</div>
+            <div class="location-detail-icon"><svg width="20" height="19" viewBox="0 0 20 19" fill="white"><path d="M10 0l2.35 7.22H20l-6.17 4.48 2.35 7.22L10 14.44l-6.18 4.48 2.36-7.22L0 7.22h7.65z"/></svg></div>
             <div>
               <strong>Calificación verificada</strong>
               <span>4.6 estrellas en Google · Reseñas de clientes reales</span>
@@ -1621,10 +1603,10 @@
           </div>
           <div class="reveal delay-5" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
             <a href="https://wa.me/5520994239?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="btn-primary" style="flex:1; justify-content:center; text-decoration:none;">
-              💬 WhatsApp
+              WhatsApp
             </a>
             <a href="tel:5520994239" class="btn-secondary" style="flex:1; justify-content:center; background:var(--navy); border-color:var(--navy); text-decoration:none;">
-              📞 Llamar
+              Llamar
             </a>
           </div>
         </div>
@@ -1655,7 +1637,7 @@
             Cotizar por WhatsApp ahora
           </a>
           <a href="tel:5520994239" class="cta-phone-btn">
-            📞 Llamar: 55 2099 4239
+            Llamar: 55 2099 4239
           </a>
         </div>
         <div class="cta-guarantee">
@@ -1674,7 +1656,7 @@
     <div class="footer-inner container">
       <div>
         <a href="#hero" class="nav-logo" style="text-decoration:none; display:inline-flex; gap:12px; align-items:center; margin-bottom:4px;">
-          <div class="nav-logo-icon">🚚</div>
+          <div class="nav-logo-icon"><svg width="22" height="15" viewBox="0 0 22 15" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="12" height="9" rx="1.5"/><path d="M13 4h5.5L21 8v5h-8V4z"/><circle cx="4.5" cy="13" r="1.8"/><circle cx="17" cy="13" r="1.8"/></svg></div>
           <div class="nav-logo-text">
             <span class="nav-logo-name" style="font-size:17px;">FLETES Y MUDANZAS</span>
             <span class="nav-logo-sub">XOCHIMILCO · SITIO #913</span>
@@ -1682,15 +1664,15 @@
         </a>
         <p class="footer-desc">Empresa de fletes y mudanzas con registro autorizado en Xochimilco, CDMX. Servicio profesional, confiable y personalizado para traslados residenciales, de oficina y de mercancía.</p>
         <div class="footer-contact-row">
-          <span>📞</span>
+          <span style="font-size:13px; opacity:0.5;">Tel</span>
           <a href="tel:5520994239">55 2099 4239</a>
         </div>
         <div class="footer-contact-row">
-          <span>📍</span>
+          <span style="font-size:13px; opacity:0.5;">Dir</span>
           <a href="#">Av. de La Noria, Paseos del Sur, Xochimilco, CDMX</a>
         </div>
         <a href="https://wa.me/5520994239?text=Hola,%20quiero%20información%20sobre%20fletes%20y%20mudanzas" target="_blank" class="footer-whatsapp" style="margin-top:16px;">
-          <span class="footer-whatsapp-icon">💬</span>
+          <span class="footer-whatsapp-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
           <div>
             <strong>Escríbenos por WhatsApp</strong>
             <span>Respuesta rápida · 55 2099 4239</span>
@@ -1724,7 +1706,7 @@
           Disponibles de lunes a sábado para atender tu cotización. Tiempo de respuesta inmediato.
         </p>
         <a href="tel:5520994239" style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px 16px; text-decoration:none; color:var(--white); font-size:15px; font-weight:700; margin-bottom:10px; transition:background 0.2s;">
-          📞 55 2099 4239
+          55 2099 4239
         </a>
         <div style="font-size:12px; color:rgba(255,255,255,0.3); margin-top:14px;">
           <div style="font-weight:700; font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:4px;">Sitio Autorizado #913</div>
