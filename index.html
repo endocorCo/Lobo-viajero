@@ -561,60 +561,112 @@
 
     /* ── WHY US ── */
     .why-bg { background: var(--navy); }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 28px; margin-top: 60px;
+
+    .why-header-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 80px;
     }
-    .why-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px;
-      position: relative; overflow: hidden;
-      transition: background 0.3s, transform 0.35s, box-shadow 0.35s;
+
+    .why-main-split {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 100px;
+      align-items: start;
     }
-    .why-card:hover {
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(80,0,0,0.3);
+
+    .why-anchor { position: sticky; top: 100px; }
+
+    .why-anchor-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 100px; font-weight: 900;
+      line-height: 0.88; letter-spacing: -3px;
+      color: var(--gold);
+      margin-bottom: 6px;
     }
-    .why-num {
+
+    .why-anchor-sitio {
+      font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,0.30);
+      letter-spacing: 3.5px; text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .why-anchor-rule {
+      height: 1px;
+      background: rgba(255,255,255,0.09);
+      margin-bottom: 32px;
+    }
+
+    .why-anchor-stars {
+      color: #F5C842; font-size: 15px;
+      letter-spacing: 3px; margin-bottom: 10px;
+    }
+
+    .why-anchor-score {
       font-family: 'Oswald', sans-serif;
-      font-size: 64px; font-weight: 700;
-      color: rgba(30,111,192,0.12);
-      line-height: 1;
-      position: absolute; top: 16px; right: 20px;
-      pointer-events: none;
-      transition: color 0.3s;
+      font-size: 58px; font-weight: 700;
+      color: var(--white); line-height: 1;
     }
-    .why-card:hover .why-num { color: rgba(30,111,192,0.22); }
-    .why-icon {
-      font-size: 32px; margin-bottom: 18px;
+
+    .why-anchor-score-label {
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      margin-top: 6px; margin-bottom: 32px;
+      line-height: 1.5;
     }
-    .why-card h3 {
+
+    .why-anchor-statement {
+      font-size: 14px; line-height: 1.7;
+      color: rgba(255,255,255,0.40);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .why-rows { display: flex; flex-direction: column; }
+
+    .why-row {
+      display: grid;
+      grid-template-columns: 40px 30px 1fr;
+      gap: 0 16px;
+      padding: 32px 0;
+      align-items: start;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: opacity 0.22s ease;
+    }
+
+    .why-rows .why-row:first-child {
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .why-rows:hover .why-row { opacity: 0.4; }
+    .why-rows:hover .why-row:hover { opacity: 1; }
+
+    .why-row-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 1px; padding-top: 5px;
+    }
+
+    .why-row-icon {
+      font-size: 19px; padding-top: 3px; line-height: 1;
+    }
+
+    .why-row-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px; font-weight: 800;
-      color: var(--white); margin-bottom: 10px;
+      font-size: 21px; font-weight: 800;
+      color: var(--white); margin-bottom: 7px;
+      letter-spacing: 0.2px;
+      transition: color 0.22s ease;
     }
-    .why-card p {
-      font-size: 14px; line-height: 1.65;
-      color: rgba(255,255,255,0.58);
-    }
-    .why-highlight {
-      grid-column: span 3;
-      background: linear-gradient(135deg, rgba(30,111,192,0.15), rgba(185,28,28,0.1));
-      border: 1px solid rgba(30,111,192,0.3);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-      padding: 36px 40px;
-    }
-    .why-highlight-text h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px; font-weight: 800;
-      color: var(--white); margin-bottom: 8px;
-    }
-    .why-highlight-text p {
-      font-size: 15px; color: rgba(255,255,255,0.65);
+
+    .why-row:hover .why-row-title { color: var(--orange); }
+
+    .why-row-body {
+      font-size: 14.5px; line-height: 1.65;
+      color: rgba(255,255,255,0.5);
     }
 
     /* ── COVERAGE ── */
@@ -1015,8 +1067,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-highlight { grid-column: span 2; }
+      .why-header-split { gap: 32px; }
+      .why-main-split { grid-template-columns: 260px 1fr; gap: 60px; }
       .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
@@ -1033,8 +1085,11 @@
       .hamburger { display: flex; }
       .section-pad { padding: 72px 0; }
       .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .why-highlight { grid-column: span 1; }
+      .why-header-split { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+      .why-main-split { grid-template-columns: 1fr; gap: 44px; }
+      .why-anchor { position: static; }
+      .why-anchor-num { font-size: 72px; }
+      .why-anchor-score { font-size: 44px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
       .trust-divider { display: none; }
@@ -1278,57 +1333,85 @@
   <!-- WHY US -->
   <section class="why-bg section-pad" id="nosotros">
     <div class="container">
-      <div class="reveal">
-        <div class="section-label" style="color: #E8C040;">Por qué elegirnos</div>
-        <h2 class="section-title white">La diferencia que <em>marca</em><br/>nuestra empresa</h2>
-        <p class="section-body white">Somos una agencia con años de trayectoria, respaldo oficial y compromisos reales con cada cliente.</p>
+
+      <!-- Asymmetric header -->
+      <div class="why-header-split reveal">
+        <div>
+          <div class="section-label" style="color:#E8C040;">Por qué elegirnos</div>
+          <h2 class="section-title white">La diferencia que<br/><em>marca</em> nuestra empresa</h2>
+        </div>
+        <div style="padding-bottom:6px;">
+          <p class="section-body white">Somos una agencia con años de trayectoria, respaldo oficial y compromisos reales con cada cliente que confía en nosotros.</p>
+        </div>
       </div>
-      <div class="why-grid">
-        <div class="why-card reveal delay-1">
-          <div class="why-num">01</div>
-          <div class="why-icon">🏛️</div>
-          <h3>Sitio Autorizado #913</h3>
-          <p>Contamos con registro oficial que respalda la legalidad y seriedad de nuestra operación frente a cualquier cliente.</p>
+
+      <!-- Split: anchor + rows -->
+      <div class="why-main-split">
+
+        <!-- Left: credential anchor -->
+        <div class="why-anchor reveal-left delay-1">
+          <div class="why-anchor-num">#913</div>
+          <div class="why-anchor-sitio">Sitio Autorizado</div>
+          <div class="why-anchor-rule"></div>
+          <div class="why-anchor-stars">★★★★★</div>
+          <div class="why-anchor-score">4.6</div>
+          <div class="why-anchor-score-label">Calificación verificada<br/>en Google Maps</div>
+          <p class="why-anchor-statement">Esa calificación no se compra, se gana con servicio real y consistente.</p>
+          <a href="tel:5520994239" class="btn-primary">📞 Hablar con nosotros</a>
         </div>
-        <div class="why-card reveal delay-2">
-          <div class="why-num">02</div>
-          <div class="why-icon">🏢</div>
-          <h3>Oficinas Establecidas</h3>
-          <p>Tenemos una dirección física en Xochimilco. No somos una empresa fantasma: puedes venir a vernos personalmente.</p>
-        </div>
-        <div class="why-card reveal delay-3">
-          <div class="why-num">03</div>
-          <div class="why-icon">⚡</div>
-          <h3>Respuesta Rápida</h3>
-          <p>Respondemos en minutos por WhatsApp o teléfono. Tu tiempo importa y no te hacemos esperar para darte una cotización.</p>
-        </div>
-        <div class="why-card reveal delay-1">
-          <div class="why-num">04</div>
-          <div class="why-icon">🤝</div>
-          <h3>Atención Personalizada</h3>
-          <p>Cada mudanza o flete es distinto. Adaptamos el servicio a tus necesidades específicas con trato directo y humano.</p>
-        </div>
-        <div class="why-card reveal delay-2">
-          <div class="why-num">05</div>
-          <div class="why-icon">🗺️</div>
-          <h3>Cobertura en CDMX</h3>
-          <p>Operamos en Xochimilco y toda la Ciudad de México. Sur de CDMX, Centro y zona metropolitana sin problema.</p>
-        </div>
-        <div class="why-card reveal delay-3">
-          <div class="why-num">06</div>
-          <div class="why-icon">🛡️</div>
-          <h3>Cuidado en Cada Traslado</h3>
-          <p>Tratamos tus pertenencias como si fueran nuestras. Empaque cuidadoso y manejo profesional en cada servicio.</p>
-        </div>
-        <div class="why-highlight why-card reveal">
-          <div class="why-highlight-text">
-            <h3>Calificación 4.6 ★ en Google</h3>
-            <p>Nuestros clientes nos recomiendan. Esa calificación no se compra, se gana con servicio real y consistente.</p>
+
+        <!-- Right: reasons as ruled rows -->
+        <div class="why-rows">
+          <div class="why-row reveal delay-1">
+            <div class="why-row-num">01</div>
+            <div class="why-row-icon">🏛️</div>
+            <div>
+              <div class="why-row-title">Sitio Autorizado #913</div>
+              <p class="why-row-body">Contamos con registro oficial que respalda la legalidad y seriedad de nuestra operación frente a cualquier cliente.</p>
+            </div>
           </div>
-          <a href="tel:5520994239" class="btn-primary">
-            📞 Hablar con nosotros
-          </a>
+          <div class="why-row reveal delay-2">
+            <div class="why-row-num">02</div>
+            <div class="why-row-icon">🏢</div>
+            <div>
+              <div class="why-row-title">Oficinas Establecidas</div>
+              <p class="why-row-body">Tenemos una dirección física en Xochimilco. No somos una empresa fantasma: puedes venir a vernos personalmente.</p>
+            </div>
+          </div>
+          <div class="why-row reveal delay-3">
+            <div class="why-row-num">03</div>
+            <div class="why-row-icon">⚡</div>
+            <div>
+              <div class="why-row-title">Respuesta Rápida</div>
+              <p class="why-row-body">Respondemos en minutos por WhatsApp o teléfono. Tu tiempo importa y no te hacemos esperar para darte una cotización.</p>
+            </div>
+          </div>
+          <div class="why-row reveal delay-4">
+            <div class="why-row-num">04</div>
+            <div class="why-row-icon">🤝</div>
+            <div>
+              <div class="why-row-title">Atención Personalizada</div>
+              <p class="why-row-body">Cada mudanza o flete es distinto. Adaptamos el servicio a tus necesidades específicas con trato directo y humano.</p>
+            </div>
+          </div>
+          <div class="why-row reveal delay-5">
+            <div class="why-row-num">05</div>
+            <div class="why-row-icon">🗺️</div>
+            <div>
+              <div class="why-row-title">Cobertura en CDMX</div>
+              <p class="why-row-body">Operamos en Xochimilco y toda la Ciudad de México. Sur de CDMX, Centro y zona metropolitana sin problema.</p>
+            </div>
+          </div>
+          <div class="why-row reveal delay-6">
+            <div class="why-row-num">06</div>
+            <div class="why-row-icon">🛡️</div>
+            <div>
+              <div class="why-row-title">Cuidado en Cada Traslado</div>
+              <p class="why-row-body">Tratamos tus pertenencias como si fueran nuestras. Empaque cuidadoso y manejo profesional en cada servicio.</p>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
