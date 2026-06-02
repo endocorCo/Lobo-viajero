@@ -1058,6 +1058,68 @@
     .scroll-top.visible { opacity: 1; pointer-events: all; }
     .scroll-top:hover { background: rgba(9,21,46,0.98); transform: translateY(-3px); }
 
+    /* ── PHOTO SECTIONS ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      margin-top: 0;
+    }
+    .photo-slot--large { grid-row: span 2; }
+    .photo-slot, .photo-slot--large { min-height: 220px; }
+    .photo-placeholder {
+      width: 100%; height: 100%; min-height: 220px;
+      background: var(--gray-light);
+      border: 2px dashed var(--gray);
+      border-radius: var(--radius);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      color: var(--gray);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.5px; text-align: center;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .photo-placeholder:hover {
+      border-color: var(--blue-mid);
+      background: rgba(0,180,200,0.05);
+      color: var(--blue-mid);
+    }
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .photo-strip-slot .photo-placeholder { min-height: 260px; }
+
+    /* ── SOCIAL SECTION ── */
+    .social-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-light);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px; font-weight: 700;
+      padding: 14px 28px; border-radius: 10px;
+      letter-spacing: 0.3px;
+      transition: border-color 0.22s, color 0.22s, box-shadow 0.22s, transform 0.22s;
+    }
+    .social-btn:hover {
+      border-color: var(--blue-mid);
+      color: var(--blue-mid);
+      box-shadow: 0 8px 24px rgba(0,180,200,0.15);
+      transform: translateY(-3px);
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .services-list { gap: 0 48px; }
@@ -1102,6 +1164,10 @@
       .cta-actions { flex-direction: column; align-items: center; }
       .steps-track { grid-template-columns: 1fr; }
       .steps-track::before { display: none; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-slot--large { grid-row: span 1; }
+      .photo-strip { grid-template-columns: 1fr; }
+      .social-btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -1111,18 +1177,18 @@
   <nav id="mainNav">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">
-        <div class="nav-logo-icon"><svg width="22" height="15" viewBox="0 0 22 15" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="12" height="9" rx="1.5"/><path d="M13 4h5.5L21 8v5h-8V4z"/><circle cx="4.5" cy="13" r="1.8"/><circle cx="17" cy="13" r="1.8"/></svg></div>
+        <div class="nav-logo-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.5"><circle cx="10" cy="10" r="9"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2"/><path d="M14 6l-2.5 4-4 2.5 2.5-4z" fill="white" stroke="none"/></svg></div>
         <div class="nav-logo-text">
           <span class="nav-logo-name">LOBO VIAJERO</span>
-          <span class="nav-logo-sub">De Aventura con el Lobo Viajero</span>
+          <span class="nav-logo-sub">TURISMO Y PERSONAL</span>
         </div>
       </a>
       <ul class="nav-links">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#ubicacion">Ubicación</a></li>
-        <li><a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="nav-cta">Cotizar por WhatsApp</a></li>
+        <li><a href="#cobertura">Cobertura</a></li>
+        <li><a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20conocer%20sus%20servicios" target="_blank" class="nav-cta">Cotizar por WhatsApp</a></li>
       </ul>
       <a href="tel:5579854361" class="nav-phone">55 7985 4361</a>
       <button class="hamburger" id="hamburger" aria-label="Menú">
@@ -1132,11 +1198,10 @@
   </nav>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#servicios">Servicios</a>
-    <a href="#nosotros">¿Por qué elegirnos?</a>
+    <a href="#nosotros">Nosotros</a>
     <a href="#como-funciona">Cómo funciona</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#ubicacion">Ubicación y contacto</a>
-    <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="mobile-cta">Cotizar por WhatsApp ahora</a>
+    <a href="#cobertura">Cobertura</a>
+    <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20conocer%20sus%20servicios" target="_blank" class="mobile-cta">Cotizar por WhatsApp ahora</a>
     <a href="tel:5579854361" style="text-align:center; color: rgba(255,255,255,0.7); font-size:14px; margin-top:4px;">55 7985 4361</a>
   </div>
 
@@ -1151,20 +1216,20 @@
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z" fill="currentColor"/></svg>
             De Aventura con el Lobo Viajero
           </span>
-          <span class="hero-badge">Oficinas Establecidas</span>
-          <span class="hero-badge">Atención Inmediata</span>
-          <span class="hero-badge">Cobertura CDMX</span>
+          <span class="hero-badge">Aventura y naturaleza</span>
+          <span class="hero-badge">Atención personalizada</span>
+          <span class="hero-badge">CDMX y alrededores</span>
         </div>
         <h1 class="hero-title reveal delay-1">
-          Fletes y mudanzas<br/>
-          <em>seguras en</em><br/>
-          [TU CIUDAD]
+          Tu agencia de<br/>
+          <em>aventura</em> y<br/>
+          turismo
         </h1>
         <p class="hero-subtitle reveal delay-2">
-          [TU SLOGAN O DESCRIPCIÓN BREVE]. Atención rápida, servicio confiable y cotizaciones inmediatas. Tu tranquilidad es nuestra prioridad.
+          Transporte personal, excursiones, renta de camionetas, paquetería y rescate de motos. Vive la aventura con el respaldo de profesionales.
         </p>
         <div class="hero-actions reveal delay-3">
-          <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="btn-primary">
+          <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20conocer%20sus%20servicios" target="_blank" class="btn-primary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
             Cotizar por WhatsApp
           </a>
@@ -1174,16 +1239,16 @@
         </div>
         <div class="hero-stats reveal delay-4">
           <div class="hero-stat">
-            <div class="hero-stat-num">4.6<span>★</span></div>
-            <div class="hero-stat-label">Calificación Google</div>
+            <div class="hero-stat-num">[<span>N</span>]</div>
+            <div class="hero-stat-label">[TU STAT 1]</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">#<span>913</span></div>
-            <div class="hero-stat-label">Sitio Autorizado</div>
+            <div class="hero-stat-num">[<span>N</span>]</div>
+            <div class="hero-stat-label">[TU STAT 2]</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num"><span>+</span>10</div>
-            <div class="hero-stat-label">Años de experiencia</div>
+            <div class="hero-stat-num">[<span>+</span>N]</div>
+            <div class="hero-stat-label">[TU STAT 3]</div>
           </div>
         </div>
       </div>
@@ -1205,21 +1270,14 @@
           <div style="text-align:center; margin-bottom:20px; opacity:0.15;">
             <svg width="120" height="72" viewBox="0 0 120 72" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="68" height="44" rx="3"/><path d="M70 20h28l16 18v20H70V20z"/><circle cx="22" cy="62" r="8"/><circle cx="88" cy="62" r="8"/><line x1="30" y1="62" x2="80" y2="62"/></svg>
           </div>
-          <div class="hero-card-title">Servicio profesional certificado</div>
+          <div class="hero-card-title">Aventura con profesionales</div>
           <ul class="hero-feature-list">
-            <li>Mudanzas residenciales y de oficina</li>
-            <li>Traslado de mercancía seguro</li>
-            <li>Servicio urgente disponible</li>
-            <li>Personal capacitado y confiable</li>
-            <li>Presupuesto sin compromiso</li>
+            <li>Transporte personal y excursiones</li>
+            <li>Renta de camionetas</li>
+            <li>Paquetería y envíos</li>
+            <li>Rescate de motos</li>
+            <li>Cotización sin compromiso</li>
           </ul>
-          <div class="hero-rating-row">
-            <div class="stars">★★★★★</div>
-            <div>
-              <div class="rating-text">4.6 / 5 estrellas</div>
-              <div class="rating-sub">Calificación verificada en Google</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -1230,42 +1288,42 @@
   <div class="trust-bar">
     <div class="trust-bar-inner">
       <div class="trust-item reveal">
-        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0zm3.5 7.5L8 11 5.5 8.5l1.1-1.1L8 8.8l2.4-2.4z"/></svg></div>
+        <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.5"><path d="M10 1l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div>
         <div class="trust-text">
-          <strong>Sitio Autorizado</strong>
-          <span>Registro oficial</span>
+          <strong>Aventura garantizada</strong>
+          <span>Experiencias únicas</span>
         </div>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-1">
-        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="white" stroke-width="1.4"><rect x="1" y="0" width="14" height="20" rx="1"/><rect x="3.5" y="3" width="3" height="3"/><rect x="9.5" y="3" width="3" height="3"/><rect x="3.5" y="8" width="3" height="3"/><rect x="9.5" y="8" width="3" height="3"/><rect x="5.5" y="13" width="5" height="7"/></svg></div>
+        <div class="trust-icon"><svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="white" stroke-width="1.5"><rect x="1" y="1" width="12" height="9" rx="1.5"/><path d="M13 4h4l2 3.5V13h-6V4z"/><circle cx="4.5" cy="13.5" r="1.8"/><circle cx="16.5" cy="13.5" r="1.8"/></svg></div>
         <div class="trust-text">
-          <strong>Oficinas Establecidas</strong>
-          <span>[TU CIUDAD], CDMX</span>
+          <strong>Transporte propio</strong>
+          <span>Flota disponible</span>
         </div>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-2">
-        <div class="trust-icon"><svg width="20" height="19" viewBox="0 0 20 19" fill="white"><path d="M10 0l2.35 7.22H20l-6.17 4.48 2.35 7.22L10 14.44l-6.18 4.48 2.36-7.22L0 7.22h7.65z"/></svg></div>
+        <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.5"><circle cx="10" cy="10" r="9"/><path d="M10 5v5l3 3"/></svg></div>
         <div class="trust-text">
-          <strong>4.6 Estrellas Google</strong>
-          <span>Calificación verificada</span>
+          <strong>Atención inmediata</strong>
+          <span>Respuesta rápida</span>
         </div>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-3">
         <div class="trust-icon"><svg width="13" height="20" viewBox="0 0 13 20" fill="white"><path d="M7.5 0H2.5L0 10h5L3 20l10-13H7.5z"/></svg></div>
         <div class="trust-text">
-          <strong>Cotización inmediata</strong>
-          <span>Respuesta en minutos</span>
+          <strong>Servicio urgente</strong>
+          <span>Disponible hoy</span>
         </div>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item reveal delay-4">
-        <div class="trust-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0C3.6 0 0 3.6 0 8c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg></div>
+        <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.5"><path d="M10 1C5 1 1 5 1 10s4 9 9 9 9-4 9-9-4-9-9-9zm0 5v4l3 2"/></svg></div>
         <div class="trust-text">
-          <strong>Toda la CDMX</strong>
-          <span>Sur y zona metropolitana</span>
+          <strong>Cotización gratis</strong>
+          <span>Sin compromiso</span>
         </div>
       </div>
     </div>
@@ -1276,45 +1334,45 @@
     <div class="container">
       <div class="reveal">
         <div class="section-label">Nuestros servicios</div>
-        <h2 class="section-title">Todo lo que necesitas<br/>para tu <em>traslado</em></h2>
-        <p class="section-body">Servicio profesional y confiable para cada tipo de mudanza o flete en [TU CIUDAD] y toda la Ciudad de México.</p>
+        <h2 class="section-title">Todo lo que puedes<br/>vivir con <em>nosotros</em></h2>
+        <p class="section-body">Desde excursiones hasta transporte privado. Ofrecemos experiencias y servicios diseñados para tu aventura.</p>
       </div>
       <div class="services-list">
         <div class="service-item reveal delay-1">
           <div class="service-item-num">01</div>
-          <div class="service-item-name">Mudanzas Residenciales</div>
-          <p class="service-item-desc">Trasladamos tu hogar con el mayor cuidado. Empaque, carga y entrega profesional de todos tus bienes con total seguridad.</p>
+          <div class="service-item-name">Transporte Personal</div>
+          <p class="service-item-desc">Traslados privados seguros y cómodos para grupos o individuos. Puntualidad y atención personalizada en cada viaje.</p>
           <span class="service-item-tag">Más solicitado</span>
         </div>
         <div class="service-item reveal delay-2">
           <div class="service-item-num">04</div>
-          <div class="service-item-name">Traslado de Mercancía</div>
-          <p class="service-item-desc">Transporte seguro de mercancía comercial e industrial. Manejo especializado, puntualidad garantizada y seguimiento en ruta.</p>
-          <span class="service-item-tag">Comercial</span>
+          <div class="service-item-name">Paquetería</div>
+          <p class="service-item-desc">Envío y recepción de paquetes con seguimiento. Servicio confiable para tus envíos locales y foráneos.</p>
+          <span class="service-item-tag">Envíos</span>
         </div>
         <div class="service-item reveal delay-2">
           <div class="service-item-num">02</div>
-          <div class="service-item-name">Mudanzas de Oficina</div>
-          <p class="service-item-desc">Reubicación de empresas con mínimo tiempo de inactividad. Equipo de cómputo, mobiliario y archivos tratados con protocolo.</p>
-          <span class="service-item-tag">Corporativo</span>
+          <div class="service-item-name">Excursiones</div>
+          <p class="service-item-desc">Recorridos guiados a destinos increíbles. Grupos pequeños, rutas planeadas y experiencias que dejan huella.</p>
+          <span class="service-item-tag">Aventura</span>
         </div>
         <div class="service-item reveal delay-3">
           <div class="service-item-num">05</div>
-          <div class="service-item-name">Servicio Urgente</div>
-          <p class="service-item-desc">¿Necesitas un flete hoy mismo? Contamos con disponibilidad para emergencias y traslados urgentes con respuesta inmediata.</p>
-          <span class="service-item-tag">Disponible hoy</span>
+          <div class="service-item-name">Rescate de Motos</div>
+          <p class="service-item-desc">Asistencia y rescate para motociclistas. Respondemos rápido cuando más lo necesitas, en ruta o en la ciudad.</p>
+          <span class="service-item-tag">Asistencia</span>
         </div>
         <div class="service-item reveal delay-3">
           <div class="service-item-num">03</div>
-          <div class="service-item-name">Fletes Locales CDMX</div>
-          <p class="service-item-desc">Fletes puntuales dentro de [TU CIUDAD] y toda la Ciudad de México. Respuesta rápida y precios competitivos al instante.</p>
-          <span class="service-item-tag">[TU ZONA]</span>
+          <div class="service-item-name">Renta de Camionetas</div>
+          <p class="service-item-desc">Vehículos disponibles para grupos, viajes largos o uso diario. Camionetas en buen estado con o sin chofer.</p>
+          <span class="service-item-tag">Renta</span>
         </div>
         <div class="service-item reveal delay-4">
           <div class="service-item-num">06</div>
-          <div class="service-item-name">Recolección Programada</div>
-          <p class="service-item-desc">Agenda tu servicio con anticipación. Recogida y entrega en el día y horario que más te convengan, sin complicaciones.</p>
-          <span class="service-item-tag">Flexible</span>
+          <div class="service-item-name">[SERVICIO A DEFINIR]</div>
+          <p class="service-item-desc">[Descripción del servicio adicional que quieras agregar aquí.]</p>
+          <span class="service-item-tag">[ETIQUETA]</span>
         </div>
       </div>
     </div>
@@ -1328,10 +1386,10 @@
       <div class="why-header-split reveal">
         <div>
           <div class="section-label" style="color:#E8C040;">Por qué elegirnos</div>
-          <h2 class="section-title white">La diferencia que<br/><em>marca</em> nuestra empresa</h2>
+          <h2 class="section-title white">Por qué viajar<br/>con <em>nosotros</em></h2>
         </div>
         <div style="padding-bottom:6px;">
-          <p class="section-body white">Somos una agencia con años de trayectoria, respaldo oficial y compromisos reales con cada cliente que confía en nosotros.</p>
+          <p class="section-body white">Somos un equipo apasionado por la aventura, comprometido con darte la mejor experiencia en cada servicio que ofrecemos.</p>
         </div>
       </div>
 
@@ -1341,12 +1399,12 @@
         <!-- Left: credential anchor -->
         <div class="why-anchor reveal-left delay-1">
           <div class="why-anchor-num">[REG]</div>
-          <div class="why-anchor-sitio">Sitio Autorizado</div>
+          <div class="why-anchor-sitio">Lobo Viajero</div>
           <div class="why-anchor-rule"></div>
           <div class="why-anchor-stars">★★★★★</div>
           <div class="why-anchor-score">4.6</div>
-          <div class="why-anchor-score-label">Calificación verificada<br/>en Google Maps</div>
-          <p class="why-anchor-statement">Esa calificación no se compra, se gana con servicio real y consistente.</p>
+          <div class="why-anchor-score-label">[TU STAT]<br/>clientes satisfechos</div>
+          <p class="why-anchor-statement">Cada viaje es una aventura nueva. Contáctanos y planea la tuya.</p>
           <a href="tel:5579854361" class="btn-primary">Hablar con nosotros</a>
         </div>
 
@@ -1362,36 +1420,36 @@
           <div class="why-row reveal delay-2">
             <div class="why-row-num">02</div>
             <div>
-              <div class="why-row-title">Oficinas Establecidas</div>
-              <p class="why-row-body">Tenemos una dirección física en [TU CIUDAD]. No somos una empresa fantasma: puedes venir a vernos personalmente.</p>
+              <div class="why-row-title">Atención personalizada</div>
+              <p class="why-row-body">Cada cliente es diferente. Adaptamos el servicio a tus necesidades, tiempos y presupuesto con trato directo y humano.</p>
             </div>
           </div>
           <div class="why-row reveal delay-3">
             <div class="why-row-num">03</div>
             <div>
-              <div class="why-row-title">Respuesta Rápida</div>
-              <p class="why-row-body">Respondemos en minutos por WhatsApp o teléfono. Tu tiempo importa y no te hacemos esperar para darte una cotización.</p>
+              <div class="why-row-title">Respuesta inmediata</div>
+              <p class="why-row-body">Respondemos en minutos por WhatsApp. Tu tiempo importa y no te dejamos esperando para darte una cotización.</p>
             </div>
           </div>
           <div class="why-row reveal delay-4">
             <div class="why-row-num">04</div>
             <div>
-              <div class="why-row-title">Atención Personalizada</div>
-              <p class="why-row-body">Cada mudanza o flete es distinto. Adaptamos el servicio a tus necesidades específicas con trato directo y humano.</p>
+              <div class="why-row-title">Seguridad en ruta</div>
+              <p class="why-row-body">Contamos con vehículos en buen estado y conductores responsables. Tu seguridad es nuestra prioridad en cada trayecto.</p>
             </div>
           </div>
           <div class="why-row reveal delay-5">
             <div class="why-row-num">05</div>
             <div>
-              <div class="why-row-title">Cobertura en CDMX</div>
-              <p class="why-row-body">Operamos en [TU CIUDAD] y toda la Ciudad de México. Sur de CDMX, Centro y zona metropolitana sin problema.</p>
+              <div class="why-row-title">Cobertura amplia</div>
+              <p class="why-row-body">Operamos en CDMX y alrededores. Sur, Centro y zona metropolitana sin problema. Consulta tu destino.</p>
             </div>
           </div>
           <div class="why-row reveal delay-6">
             <div class="why-row-num">06</div>
             <div>
-              <div class="why-row-title">Cuidado en Cada Traslado</div>
-              <p class="why-row-body">Tratamos tus pertenencias como si fueran nuestras. Empaque cuidadoso y manejo profesional en cada servicio.</p>
+              <div class="why-row-title">Precios justos</div>
+              <p class="why-row-body">Cotizaciones claras, sin letra pequeña ni cargos ocultos. Sabemos que el valor de una aventura no debe ser una sorpresa.</p>
             </div>
           </div>
         </div>
@@ -1406,33 +1464,33 @@
       <div class="reveal" style="text-align:center; max-width: 600px; margin: 0 auto;">
         <div class="section-label" style="justify-content: center;">Proceso simple</div>
         <h2 class="section-title">Así de fácil <em>funciona</em></h2>
-        <p class="section-body">Desde que nos contactas hasta que entregamos, todo es claro y sin complicaciones.</p>
+        <p class="section-body">Desde que nos contactas hasta que vives la aventura, todo es simple y sin complicaciones.</p>
       </div>
       <div class="steps-track">
         <div class="step reveal delay-1">
           <div class="step-num">01</div>
           <h3>Contáctanos</h3>
-          <p>Escríbenos por WhatsApp o llámanos. Atendemos rápido sin burocracia.</p>
+          <p>Escríbenos por WhatsApp o llámanos. Atendemos rápido.</p>
         </div>
         <div class="step reveal delay-2">
           <div class="step-num">02</div>
-          <h3>Cotizamos</h3>
-          <p>Te damos un precio claro, sin letra pequeña ni costos ocultos.</p>
+          <h3>Planea</h3>
+          <p>Cuéntanos qué necesitas y te damos una cotización clara al momento.</p>
         </div>
         <div class="step reveal delay-3">
           <div class="step-num">03</div>
-          <h3>Agendamos</h3>
-          <p>Elegimos juntos el día y hora que más te convenga.</p>
+          <h3>Agenda</h3>
+          <p>Elegimos juntos el día, la hora y el destino que más te convengan.</p>
         </div>
         <div class="step reveal delay-4">
           <div class="step-num">04</div>
-          <h3>Recogemos</h3>
-          <p>Llegamos puntual, cargamos con cuidado y aseguramos todo correctamente.</p>
+          <h3>Nos vemos</h3>
+          <p>Llegamos puntual al punto acordado. Solo súbete y disfruta.</p>
         </div>
         <div class="step reveal delay-5">
           <div class="step-num">05</div>
-          <h3>Entregamos</h3>
-          <p>Tu traslado llega completo, a tiempo y en perfectas condiciones.</p>
+          <h3>Vive la aventura</h3>
+          <p>Nosotros nos encargamos del resto. Tú solo disfruta el camino.</p>
         </div>
       </div>
     </div>
@@ -1442,16 +1500,16 @@
   <section class="coverage-bg section-pad" id="cobertura">
     <div class="container">
       <div class="reveal">
-        <div class="section-label">Zona de cobertura</div>
-        <h2 class="section-title">Atendemos <em>toda</em><br/>la Ciudad de México</h2>
-        <p class="section-body">Con base en [TU CIUDAD], llegamos a todos los rincones de la CDMX y zona metropolitana.</p>
+        <div class="section-label">Cobertura</div>
+        <h2 class="section-title">A donde <em>quieras</em><br/>llegar</h2>
+        <p class="section-body">Con base en CDMX cubrimos múltiples zonas y destinos. Consulta si llegamos a donde tú necesitas.</p>
       </div>
       <div class="coverage-grid">
         <div class="coverage-zones reveal">
           <div class="zone-card">
             <div class="zone-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0z"/></svg></div>
             <div class="zone-info">
-              <strong>[TU CIUDAD]</strong>
+              <strong>[ZONA PRINCIPAL]</strong>
               <span>Zona principal de operación — servicio inmediato disponible</span>
             </div>
           </div>
@@ -1465,19 +1523,19 @@
           <div class="zone-card">
             <div class="zone-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.4"><circle cx="10" cy="10" r="9"/><path d="M10 1c-2 3-3 6-3 9s1 6 3 9M10 1c2 3 3 6 3 9s-1 6-3 9M1 10h18"/></svg></div>
             <div class="zone-info">
-              <strong>Ciudad de México completa</strong>
-              <span>Las 16 alcaldías cubiertas — traslados dentro de CDMX</span>
+              <strong>[ZONA 3]</strong>
+              <span>[Descripción de la tercera zona de cobertura]</span>
             </div>
           </div>
           <div class="zone-card">
             <div class="zone-icon"><svg width="13" height="20" viewBox="0 0 13 20" fill="white"><path d="M7.5 0H2.5L0 10h5L3 20l10-13H7.5z"/></svg></div>
             <div class="zone-info">
               <strong>Servicio urgente</strong>
-              <span>Disponible en [TU CIUDAD] y Sur CDMX con alta prioridad</span>
+              <span>Disponible en las principales zonas con alta prioridad</span>
             </div>
           </div>
           <a href="https://wa.me/525579854361?text=Hola,%20quiero%20saber%20si%20tienen%20cobertura%20en%20mi%20zona" target="_blank" class="btn-primary" style="margin-top:8px; justify-content:center; text-decoration:none;">
-            ¿Llegas a mi zona? Consúltanos
+            ¿Llegas a mi destino? Consúltanos
           </a>
         </div>
         <div class="coverage-map-placeholder reveal-right">
@@ -1504,122 +1562,69 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials-bg section-pad" id="testimonios">
+  <!-- GALERÍA -->
+  <section class="testimonials-bg section-pad" id="galeria">
     <div class="container">
       <div class="reveal" style="text-align: center; max-width: 580px; margin: 0 auto;">
-        <div class="section-label" style="justify-content:center;">Testimonios reales</div>
-        <h2 class="section-title">Lo que dicen<br/><em>nuestros clientes</em></h2>
-        <p class="section-body">Resultados reales de personas que confiaron en nosotros para su mudanza o flete.</p>
+        <div class="section-label" style="justify-content:center;">Galería</div>
+        <h2 class="section-title">Nuestras <em>aventuras</em></h2>
+        <p class="section-body">Aquí van tus mejores fotos. Reemplaza estos bloques con imágenes reales.</p>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal delay-1">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">Excelente servicio. Llegaron a tiempo, cuidaron todos mis muebles con cobertores y no tuve ningún daño. Ya los recomendé con mis vecinos de [TU CIUDAD].</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">M</div>
-            <div class="testimonial-author-info">
-              <strong>María G.</strong>
-              <span>Mudanza residencial • [TU CIUDAD]</span>
-              <div class="testimonial-verified">Reseña verificada en Google</div>
-            </div>
+      <div class="photo-grid reveal">
+        <div class="photo-slot photo-slot--large">
+          <div class="photo-placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO PRINCIPAL<br/><small>Reemplaza con tu mejor imagen</small></span>
           </div>
         </div>
-        <div class="testimonial-card reveal delay-2">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">Contraté el flete con poco tiempo de anticipación y respondieron al momento. El precio fue justo y el equipo fue muy profesional. 100% recomendados.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">R</div>
-            <div class="testimonial-author-info">
-              <strong>Roberto C.</strong>
-              <span>Flete urgente • Sur CDMX</span>
-              <div class="testimonial-verified">Reseña verificada en Google</div>
-            </div>
+        <div class="photo-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO 2</span>
           </div>
         </div>
-        <div class="testimonial-card reveal delay-3">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-stars">★★★★☆</div>
-          <p class="testimonial-text">Hicimos la mudanza de nuestra oficina sin interrumpir operaciones. Muy organizados, cuidadosos con el equipo y muy buen precio para lo que incluye.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:700;">D</div>
-            <div class="testimonial-author-info">
-              <strong>Daniela R.</strong>
-              <span>Mudanza de oficina • Iztapalapa</span>
-              <div class="testimonial-verified">Reseña verificada en Google</div>
-            </div>
+        <div class="photo-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO 3</span>
           </div>
         </div>
-      </div>
-      <div class="reveal" style="text-align: center; margin-top: 44px;">
-        <div style="display:inline-flex; align-items:center; gap:12px; background:var(--white); border:1px solid var(--gray-light); border-radius:12px; padding:16px 24px; box-shadow:var(--shadow-sm);">
-          <div style="font-size:24px;">⭐</div>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; color:var(--text-dark);">4.6 / 5 estrellas en Google</div>
-            <div style="font-size:13px; color:var(--text-muted);">Calificación promedio · De Aventura con el Lobo Viajero</div>
+        <div class="photo-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO 4</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOCATION -->
-  <section class="location-bg section-pad" id="ubicacion">
+  <!-- GALERÍA 2 -->
+  <section class="location-bg section-pad" id="galeria2">
     <div class="container">
-      <div class="reveal">
-        <div class="section-label">Dónde estamos</div>
-        <h2 class="section-title">Oficinas <em>establecidas</em><br/>en [TU CIUDAD]</h2>
-        <p class="section-body">Tenemos una dirección física donde puedes visitarnos. No somos un número de WhatsApp sin respaldo.</p>
+      <div class="reveal" style="margin-bottom:48px;">
+        <div class="section-label">Más aventuras</div>
+        <h2 class="section-title">Momentos <em>reales</em></h2>
+        <p class="section-body">Una segunda sección para más fotos. Reemplaza estos bloques con imágenes tuyas.</p>
       </div>
-      <div class="location-grid">
-        <div class="location-info">
-          <div class="location-detail reveal delay-1">
-            <div class="location-detail-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0C3.6 0 0 3.6 0 8c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg></div>
-            <div>
-              <strong>Dirección de oficinas</strong>
-              <span>[TU DIRECCIÓN COMPLETA]</span>
-            </div>
-          </div>
-          <div class="location-detail reveal delay-2">
-            <div class="location-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M4 0C2 0 0 2 0 4c0 8.8 7.2 16 16 16 2 0 4-2 4-4v-3l-5-2-1.5 1.5C12 11 9 8 7.5 6.5L9 5 7 0H4z"/></svg></div>
-            <div>
-              <strong>Teléfono y WhatsApp</strong>
-              <span><a href="tel:5579854361" style="color:var(--orange); font-weight:700; text-decoration:none;">55 7985 4361</a></span>
-            </div>
-          </div>
-          <div class="location-detail reveal delay-3">
-            <div class="location-detail-icon"><svg width="16" height="20" viewBox="0 0 16 20" fill="white"><path d="M8 0L0 3V8c0 5.5 3.4 9.5 8 11.5C12.6 17.5 16 13.5 16 8V3L8 0zm3.5 7.5L8 11 5.5 8.5l1.1-1.1L8 8.8l2.4-2.4z"/></svg></div>
-            <div>
-              <strong>Registro oficial</strong>
-              <span>De Aventura con el Lobo Viajero con oficinas establecidas</span>
-            </div>
-          </div>
-          <div class="location-detail reveal delay-4">
-            <div class="location-detail-icon"><svg width="20" height="19" viewBox="0 0 20 19" fill="white"><path d="M10 0l2.35 7.22H20l-6.17 4.48 2.35 7.22L10 14.44l-6.18 4.48 2.36-7.22L0 7.22h7.65z"/></svg></div>
-            <div>
-              <strong>Calificación verificada</strong>
-              <span>4.6 estrellas en Google · Reseñas de clientes reales</span>
-            </div>
-          </div>
-          <div class="reveal delay-5" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
-            <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="btn-primary" style="flex:1; justify-content:center; text-decoration:none;">
-              WhatsApp
-            </a>
-            <a href="tel:5579854361" class="btn-secondary" style="flex:1; justify-content:center; background:var(--navy); border-color:var(--navy); text-decoration:none;">
-              Llamar
-            </a>
+      <div class="photo-strip reveal">
+        <div class="photo-strip-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO A</span>
           </div>
         </div>
-        <div class="location-map-wrap reveal-right">
-          <iframe
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="[PEGA AQUÍ EL EMBED DE GOOGLE MAPS DE TU DIRECCIÓN]"
-            title="Ubicación [TU EMPRESA]"
-          ></iframe>
+        <div class="photo-strip-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO B</span>
+          </div>
+        </div>
+        <div class="photo-strip-slot">
+          <div class="photo-placeholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>FOTO C</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1630,11 +1635,11 @@
     <div class="cta-orb"></div>
     <div class="container">
       <div class="cta-inner reveal">
-        <div class="section-label" style="justify-content:center; color:var(--orange-glow);">¿Listo para mover?</div>
-        <h2>Tu mudanza segura<br/>empieza <em>hoy</em></h2>
-        <p>Cotiza gratis, sin compromiso. Respondemos en minutos por WhatsApp o por teléfono. con años de experiencia en [TU CIUDAD].</p>
+        <div class="section-label" style="justify-content:center; color:var(--orange-glow);">¿Listo para la aventura?</div>
+        <h2>Tu próxima aventura<br/>empieza <em>hoy</em></h2>
+        <p>Cotiza gratis, sin compromiso. Respondemos en minutos por WhatsApp o por teléfono.</p>
         <div class="cta-actions">
-          <a href="https://wa.me/525579854361?text=Hola,%20quiero%20cotizar%20un%20flete%20o%20mudanza.%20¿Me%20pueden%20dar%20información?" target="_blank" class="cta-whatsapp">
+          <a href="https://wa.me/525579854361?text=Hola,%20quiero%20conocer%20sus%20servicios.%20¿Me%20pueden%20dar%20información?" target="_blank" class="cta-whatsapp">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
             Cotizar por WhatsApp ahora
           </a>
@@ -1645,10 +1650,42 @@
         <div class="cta-guarantee">
           <div class="cta-guarantee-item"><span>✓</span> Cotización sin costo</div>
           <div class="cta-guarantee-item"><span>✓</span> Sin letra pequeña</div>
-          <div class="cta-guarantee-item"><span>✓</span> Personal certificado</div>
-          <div class="cta-guarantee-item"><span>✓</span> De Aventura con el Lobo Viajero</div>
+          <div class="cta-guarantee-item"><span>✓</span> Personal con experiencia</div>
+          <div class="cta-guarantee-item"><span>✓</span> Lobo Viajero</div>
           <div class="cta-guarantee-item"><span>✓</span> Respuesta en minutos</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDES SOCIALES -->
+  <section class="section-pad" style="background:var(--cream); border-top:1px solid var(--gray-light);">
+    <div class="container">
+      <div class="reveal" style="text-align:center; max-width:560px; margin:0 auto 48px;">
+        <div class="section-label" style="justify-content:center;">Síguenos</div>
+        <h2 class="section-title">Encuéntranos en<br/><em>redes sociales</em></h2>
+      </div>
+      <div class="social-grid reveal">
+        <a href="https://www.instagram.com/lobo_viajero_oficial/" target="_blank" class="social-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/people/De-Aventura-con-El-Lobo-Viajero/100084130101005/" target="_blank" class="social-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.tiktok.com/@thiago_lobo_12" target="_blank" class="social-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.73a4.86 4.86 0 01-1.01-.04z"/></svg>
+          TikTok
+        </a>
+        <a href="https://www.youtube.com/@deaventuraconelloboviajero1327" target="_blank" class="social-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          YouTube
+        </a>
+        <a href="mailto:loboviajero6462@gmail.com" class="social-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          Correo
+        </a>
       </div>
     </div>
   </section>
@@ -1658,13 +1695,13 @@
     <div class="footer-inner container">
       <div>
         <a href="#hero" class="nav-logo" style="text-decoration:none; display:inline-flex; gap:12px; align-items:center; margin-bottom:4px;">
-          <div class="nav-logo-icon"><svg width="22" height="15" viewBox="0 0 22 15" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="12" height="9" rx="1.5"/><path d="M13 4h5.5L21 8v5h-8V4z"/><circle cx="4.5" cy="13" r="1.8"/><circle cx="17" cy="13" r="1.8"/></svg></div>
+          <div class="nav-logo-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.5"><circle cx="10" cy="10" r="9"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2"/><path d="M14 6l-2.5 4-4 2.5 2.5-4z" fill="white" stroke="none"/></svg></div>
           <div class="nav-logo-text">
             <span class="nav-logo-name" style="font-size:17px;">LOBO VIAJERO</span>
             <span class="nav-logo-sub">TURISMO Y PERSONAL</span>
           </div>
         </a>
-        <p class="footer-desc">Empresa de fletes y mudanzas. Servicio profesional, confiable y personalizado para traslados residenciales, de oficina y de mercancía.</p>
+        <p class="footer-desc">Agencia de turismo y transporte personal. Excursiones, renta de camionetas, paquetería y rescate de motos. ¡Vive la aventura con nosotros!</p>
         <div class="footer-contact-row">
           <span style="font-size:13px; opacity:0.5;">Tel</span>
           <a href="tel:5579854361">55 7985 4361</a>
@@ -1673,7 +1710,7 @@
           <span style="font-size:13px; opacity:0.5;">Dir</span>
           <a href="#">[TU DIRECCIÓN]</a>
         </div>
-        <a href="https://wa.me/525579854361?text=Hola,%20quiero%20información%20sobre%20fletes%20y%20mudanzas" target="_blank" class="footer-whatsapp" style="margin-top:16px;">
+        <a href="https://wa.me/525579854361?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" target="_blank" class="footer-whatsapp" style="margin-top:16px;">
           <span class="footer-whatsapp-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
           <div>
             <strong>Escríbenos por WhatsApp</strong>
@@ -1684,12 +1721,11 @@
       <div class="footer-col">
         <h4>Servicios</h4>
         <ul class="footer-links">
-          <li><a href="#servicios">Mudanzas Residenciales</a></li>
-          <li><a href="#servicios">Mudanzas de Oficina</a></li>
-          <li><a href="#servicios">Fletes Locales CDMX</a></li>
-          <li><a href="#servicios">Traslado de Mercancía</a></li>
-          <li><a href="#servicios">Servicio Urgente</a></li>
-          <li><a href="#servicios">Recolección Programada</a></li>
+          <li><a href="#servicios">Transporte Personal</a></li>
+          <li><a href="#servicios">Excursiones</a></li>
+          <li><a href="#servicios">Renta de Camionetas</a></li>
+          <li><a href="#servicios">Paquetería</a></li>
+          <li><a href="#servicios">Rescate de Motos</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1697,15 +1733,13 @@
         <ul class="footer-links">
           <li><a href="#nosotros">¿Por qué elegirnos?</a></li>
           <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#testimonios">Testimonios</a></li>
-          <li><a href="#cobertura">Zona de cobertura</a></li>
-          <li><a href="#ubicacion">Ubicación y contacto</a></li>
+          <li><a href="#cobertura">Cobertura</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contacto directo</h4>
         <p style="font-size:13.5px; color:rgba(255,255,255,0.45); line-height:1.65; margin-bottom:16px;">
-          Disponibles de lunes a sábado para atender tu cotización. Tiempo de respuesta inmediato.
+          Disponibles para atender tu consulta. Escríbenos por WhatsApp para una respuesta inmediata.
         </p>
         <a href="tel:5579854361" style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px 16px; text-decoration:none; color:var(--white); font-size:15px; font-weight:700; margin-bottom:10px; transition:background 0.2s;">
           55 7985 4361
@@ -1718,7 +1752,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <p class="footer-copy">© 2025 <strong>Fletes y Mudanzas LOBO VIAJERO</strong>. Todos los derechos reservados.</p>
+        <p class="footer-copy">© 2025 <strong>De Aventura con el Lobo Viajero</strong>. Todos los derechos reservados.</p>
         <div class="footer-legal">
           <a href="#">Aviso de privacidad</a>
           <a href="#">Términos de servicio</a>
@@ -1728,8 +1762,8 @@
   </footer>
 
   <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20cotizar%20un%20flete%20o%20mudanza" target="_blank" class="wa-float" aria-label="WhatsApp">
-    <span class="wa-float-label">Cotizar por WhatsApp</span>
+  <a href="https://wa.me/525579854361?text=Hola,%20me%20interesa%20conocer%20sus%20servicios" target="_blank" class="wa-float" aria-label="WhatsApp">
+    <span class="wa-float-label">Escríbenos por WhatsApp</span>
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
