@@ -1073,7 +1073,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      align-items: start;
     }
     .photo-strip-slot { overflow: hidden; border-radius: var(--radius); }
 
@@ -1662,7 +1661,6 @@
         <p class="section-body">Sube tus fotos a <strong style="color:var(--orange);">media/fotos/</strong> con los nombres indicados.</p>
       </div>
       <div class="photo-strip reveal">
-        <!-- foto5: landscape 4:3 -->
         <div class="photo-strip-slot" style="aspect-ratio:4/3;">
           <img src="./media/fotos/foto5.png" alt="Aventura 5" class="photo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="photo-placeholder" style="display:none;">
@@ -1670,16 +1668,14 @@
             <span>foto5.png</span>
           </div>
         </div>
-        <!-- foto6: portrait 3:4 -->
-        <div class="photo-strip-slot" style="aspect-ratio:3/4;">
+        <div class="photo-strip-slot" style="aspect-ratio:4/3;">
           <img src="./media/fotos/foto6.png" alt="Aventura 6" class="photo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="photo-placeholder" style="display:none; min-height:260px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span>foto6.jpg</span>
           </div>
         </div>
-        <!-- foto7: portrait 3:4 -->
-        <div class="photo-strip-slot" style="aspect-ratio:3/4;">
+        <div class="photo-strip-slot" style="aspect-ratio:4/3;">
           <img src="./media/fotos/foto7.png" alt="Aventura 7" class="photo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="photo-placeholder" style="display:none;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
