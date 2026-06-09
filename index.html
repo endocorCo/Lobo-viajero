@@ -1369,15 +1369,15 @@
         </div>
         <div class="hero-stats reveal delay-4">
           <div class="hero-stat">
-            <div class="hero-stat-num"><span data-count="8">8</span><span>★</span></div>
+            <div class="hero-stat-num">8<span>★</span></div>
             <div class="hero-stat-label">Años de aventura</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num"><span>+</span><span data-count="500">500</span></div>
+            <div class="hero-stat-num"><span>+</span>500</div>
             <div class="hero-stat-label">Servicios realizados</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num"><span>+</span><span data-count="1000">1000</span></div>
+            <div class="hero-stat-num"><span>+</span>1000</div>
             <div class="hero-stat-label">Clientes satisfechos</div>
           </div>
         </div>
@@ -2022,30 +2022,6 @@
       updateIcon();
     }
 
-    // ── COUNTER ANIMATION ──
-    function animateCounter(el, target, duration) {
-      const start = performance.now();
-      const initial = 0;
-      function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4); // ease-out-quart
-        el.textContent = (target < 10 ? eased * target : Math.floor(eased * target));
-        if (progress < 1) requestAnimationFrame(update);
-        else el.textContent = target;
-      }
-      requestAnimationFrame(update);
-    }
-    const counters = document.querySelectorAll('[data-count]');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.dataset.counted) {
-          entry.target.dataset.counted = '1';
-          animateCounter(entry.target, +entry.target.dataset.count, 1400);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(el => counterObserver.observe(el));
 
     // ── EASTER EGG ──
     console.log('%c🐺 Lobo Viajero', 'font-size:22px; font-weight:900; color:#FFD24D;');
