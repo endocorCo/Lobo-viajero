@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "Fletes Xochimilco — Static Server",
+      "name": "lobo-viajero",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8081", "--directory", "/Users/jesusgaaac/Desktop/Web/Mudanzas"],
-      "port": 8081
+      "runtimeArgs": ["-m", "http.server", "3001"],
+      "port": 3001
     }
   ]
 }
