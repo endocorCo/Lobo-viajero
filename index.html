@@ -1156,6 +1156,17 @@
       color: rgba(255,255,255,0.45);
       border-radius: var(--radius-lg);
     }
+    .video-mute-btn {
+      position: absolute; bottom: 16px; right: 16px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .video-mute-btn:hover { background: rgba(0,0,0,0.7); transform: scale(1.1); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -1632,12 +1643,17 @@
         <p class="section-body white">Sube tus videos a <strong style="color:var(--gold);">media/videos/</strong> con los nombres indicados.</p>
       </div>
       <div class="video-grid reveal" style="grid-template-columns: 1fr;">
-        <div class="video-slot">
-          <video src="./media/videos/video1.mp4" class="video-embed" controls playsinline onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></video>
+        <div class="video-slot" style="position:relative;">
+          <video id="loboVideo" src="./media/videos/video1.mp4" class="video-embed" playsinline muted loop onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></video>
           <div class="photo-placeholder" style="display:none;">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <span>video1.mp4</span>
           </div>
+          <button class="video-mute-btn" id="muteBtn" aria-label="Activar sonido" title="Activar / Silenciar">
+            <!-- ícono muted por defecto -->
+            <svg id="iconMuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg id="iconUnmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -1877,6 +1893,43 @@
     document.querySelectorAll('.hero .reveal, .hero .reveal-right').forEach(el => {
       setTimeout(() => el.classList.add('visible'), 100);
     });
+
+    // ── Video: autoplay al entrar en pantalla, mute al terminar
+    const loboVideo = document.getElementById('loboVideo');
+    const muteBtn   = document.getElementById('muteBtn');
+    const iconMuted   = document.getElementById('iconMuted');
+    const iconUnmuted = document.getElementById('iconUnmuted');
+
+    if (loboVideo && muteBtn) {
+      // Autoplay / pause según visibilidad
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            loboVideo.play().catch(() => {});
+          } else {
+            loboVideo.pause();
+          }
+        });
+      }, { threshold: 0.4 });
+      videoObserver.observe(loboVideo);
+
+      // Al terminar: silenciar y seguir en loop
+      loboVideo.addEventListener('ended', () => {
+        loboVideo.muted = true;
+        updateIcon();
+      });
+
+      // Botón de mute / unmute
+      muteBtn.addEventListener('click', () => {
+        loboVideo.muted = !loboVideo.muted;
+        updateIcon();
+      });
+
+      function updateIcon() {
+        iconMuted.style.display   = loboVideo.muted ? 'block' : 'none';
+        iconUnmuted.style.display = loboVideo.muted ? 'none'  : 'block';
+      }
+    }
   </script>
 </body>
 </html>
