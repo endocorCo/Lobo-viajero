@@ -1559,7 +1559,7 @@
           <p class="service-item-desc">Hacemos tu evento inolvidable con efectos especiales profesionales para bodas, fiestas y celebraciones. Contáctanos para conocer todos los efectos disponibles.</p>
           <div style="display:flex; gap:14px; align-items:center; margin-top:16px; flex-wrap:wrap;">
             <span class="service-item-tag" style="margin-top:0;">Eventos</span>
-            <a href="#efectos-especiales" class="btn-ver-mas">Ver galería <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
+            <a href="#efectos-especiales" class="btn-ver-mas" id="btn-efectos" onclick="toggleEfectos(event)">Ver galería <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></a>
           </div>
         </div>
       </div>
@@ -1567,7 +1567,7 @@
   </section>
 
   <!-- EFECTOS ESPECIALES -->
-  <section class="efectos-bg section-pad" id="efectos-especiales">
+  <section class="efectos-bg section-pad" id="efectos-especiales" style="display:none;">
     <div class="container">
       <div class="reveal">
         <div class="section-label">Efectos Especiales</div>
@@ -2148,6 +2148,22 @@
       updateIcon();
     }
 
+
+    // ── EFECTOS ESPECIALES TOGGLE ──
+    function toggleEfectos(e) {
+      e.preventDefault();
+      const section = document.getElementById('efectos-especiales');
+      const btn = document.getElementById('btn-efectos');
+      const isHidden = section.style.display === 'none';
+      if (isHidden) {
+        section.style.display = 'block';
+        setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+        btn.innerHTML = 'Ocultar galería <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 11l4-4-4-4"/></svg>';
+      } else {
+        section.style.display = 'none';
+        btn.innerHTML = 'Ver galería <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>';
+      }
+    }
 
     // ── EASTER EGG ──
     console.log('%c🐺 Lobo Viajero', 'font-size:22px; font-weight:900; color:#FFD24D;');
