@@ -1644,7 +1644,7 @@
       </div>
       <div class="video-grid reveal" style="grid-template-columns: 1fr;">
         <div class="video-slot" style="position:relative;">
-          <video id="loboVideo" src="./media/videos/video1.mp4" class="video-embed" playsinline muted loop onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></video>
+          <video id="loboVideo" src="./media/videos/video1.mp4" class="video-embed" playsinline preload="auto" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></video>
           <div class="photo-placeholder" style="display:none;">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <span>video1.mp4</span>
@@ -1894,41 +1894,62 @@
       setTimeout(() => el.classList.add('visible'), 100);
     });
 
-    // ── Video: autoplay al entrar en pantalla, mute al terminar
-    const loboVideo = document.getElementById('loboVideo');
-    const muteBtn   = document.getElementById('muteBtn');
+    // ── Video: primera vez con sonido, luego loop silenciado
+    const loboVideo   = document.getElementById('loboVideo');
+    const muteBtn     = document.getElementById('muteBtn');
     const iconMuted   = document.getElementById('iconMuted');
     const iconUnmuted = document.getElementById('iconUnmuted');
 
     if (loboVideo && muteBtn) {
-      // Autoplay / pause según visibilidad
+      let firstPlay = true; // bandera: ¿es la primera reproducción?
+
+      function updateIcon() {
+        iconMuted.style.display   = loboVideo.muted ? 'block' : 'none';
+        iconUnmuted.style.display = loboVideo.muted ? 'none'  : 'block';
+      }
+
+      // Intenta reproducir con sonido; si el navegador lo bloquea, prueba muted
+      function playVideo() {
+        loboVideo.muted = false;
+        loboVideo.play().catch(() => {
+          // Navegador bloqueó el sonido — reproduce muted
+          loboVideo.muted = true;
+          loboVideo.play().catch(() => {});
+        });
+        updateIcon();
+      }
+
+      // Entra/sale de pantalla
+      let hasPlayed = false;
       const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) {
-            loboVideo.play().catch(() => {});
-          } else {
+          if (e.isIntersecting && !hasPlayed) {
+            hasPlayed = true;
+            playVideo();
+          } else if (!e.isIntersecting) {
             loboVideo.pause();
           }
         });
       }, { threshold: 0.4 });
       videoObserver.observe(loboVideo);
 
-      // Al terminar: silenciar y seguir en loop
+      // Al terminar la primera vez → silenciar y repetir en loop
       loboVideo.addEventListener('ended', () => {
-        loboVideo.muted = true;
-        updateIcon();
+        if (firstPlay) {
+          firstPlay = false;
+          loboVideo.muted = true;
+          updateIcon();
+        }
+        loboVideo.play().catch(() => {});
       });
 
-      // Botón de mute / unmute
+      // Botón de mute manual
       muteBtn.addEventListener('click', () => {
         loboVideo.muted = !loboVideo.muted;
         updateIcon();
       });
 
-      function updateIcon() {
-        iconMuted.style.display   = loboVideo.muted ? 'block' : 'none';
-        iconUnmuted.style.display = loboVideo.muted ? 'none'  : 'block';
-      }
+      updateIcon();
     }
   </script>
 </body>
