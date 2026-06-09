@@ -1199,7 +1199,17 @@
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
       .trust-divider { display: none; }
-      .trust-bar-inner { justify-content: center; gap: 20px; }
+      .trust-bar-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px 24px;
+        padding: 0 20px;
+      }
+      .trust-item { justify-content: flex-start; }
+      .trust-bar-inner .trust-item:last-child {
+        grid-column: 1 / -1;
+        justify-content: center;
+      }
       .steps-track { grid-template-columns: 1fr 1fr; }
       .hero-stats { gap: 20px; }
       .hero-stat-num { font-size: 26px; }
