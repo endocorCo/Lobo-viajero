@@ -15,26 +15,22 @@
   <style>
     :root {
       /* ── BRAND PALETTE · Lobo Viajero ── */
-      /* Azul Marino — fondo principal / confianza */
       --navy:       #0D1B2A;
       --navy-mid:   #152334;
       --navy-light: #1E3048;
-      /* Turquesa — aventura / acento principal */
       --blue:       #028090;
       --blue-mid:   #00B4C8;
       --blue-light: #00CAE0;
-      /* Verde naturaleza */
       --green:      #7CCBA2;
       --green-light:#A8D5BA;
-      --white:      #FFFFFF;
-      --cream:      #F4F6F8;
-      --gray-light: #E6E8EB;
+      --white:      #FAFCFE;
+      --cream:      #F2F5F8;
+      --gray-light: #E2E6EA;
       --gray:       #415A6B;
-      --red:        #00B4C8;
-      --orange:     #00B4C8;       /* turquesa → CTAs principales */
+      --orange:     #00B4C8;
       --orange-glow:#00CAE0;
-      --gold:       #FFD24D;       /* amarillo energía */
-      --text-dark:  #0D1B2A;
+      --gold:       #FFD24D;
+      --text-dark:  #0A1622;
       --text-muted: #415A6B;
       --shadow-sm:  0 2px 12px rgba(13,27,42,0.08);
       --shadow-md:  0 8px 32px rgba(13,27,42,0.14);
@@ -43,6 +39,10 @@
       --radius:     12px;
       --radius-lg:  20px;
       --transition: all 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      /* ── EASING CURVES ── */
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,21 +60,30 @@
     /* ── REVEAL ANIMATIONS ── */
     .reveal {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.72s cubic-bezier(0.25,0.46,0.45,0.94),
-                  transform 0.72s cubic-bezier(0.25,0.46,0.45,0.94);
+      transform: translateY(40px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity:0; transform:translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left { opacity:0; transform:translateX(-44px); transition: opacity 0.72s cubic-bezier(0.16,1,0.3,1), transform 0.72s cubic-bezier(0.16,1,0.3,1); }
     .reveal-left.visible { opacity:1; transform:translateX(0); }
-    .reveal-right { opacity:0; transform:translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right { opacity:0; transform:translateX(44px); transition: opacity 0.72s cubic-bezier(0.16,1,0.3,1), transform 0.72s cubic-bezier(0.16,1,0.3,1); }
     .reveal-right.visible { opacity:1; transform:translateX(0); }
-    .delay-1 { transition-delay: 0.10s !important; }
-    .delay-2 { transition-delay: 0.20s !important; }
-    .delay-3 { transition-delay: 0.30s !important; }
-    .delay-4 { transition-delay: 0.40s !important; }
-    .delay-5 { transition-delay: 0.50s !important; }
-    .delay-6 { transition-delay: 0.60s !important; }
+    .delay-1 { transition-delay: 0.08s !important; }
+    .delay-2 { transition-delay: 0.16s !important; }
+    .delay-3 { transition-delay: 0.24s !important; }
+    .delay-4 { transition-delay: 0.32s !important; }
+    .delay-5 { transition-delay: 0.40s !important; }
+    .delay-6 { transition-delay: 0.48s !important; }
+
+    /* ── PREFERS REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
 
     /* ── NAV ── */
     nav {
@@ -252,12 +261,12 @@
     .hero-badge svg { flex-shrink: 0; }
     .hero-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 5.8vw, 76px);
+      font-size: clamp(38px, 7vw, 92px);
       font-weight: 900;
       color: var(--white);
-      line-height: 1.0;
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
+      line-height: 0.95;
+      margin-bottom: 28px;
+      letter-spacing: -1px;
     }
     .hero-title em {
       font-style: normal;
@@ -459,9 +468,9 @@
     }
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 4.2vw, 54px);
-      font-weight: 900; line-height: 1.06;
-      letter-spacing: -0.3px;
+      font-size: clamp(38px, 4.8vw, 64px);
+      font-weight: 900; line-height: 1.0;
+      letter-spacing: -0.5px;
       color: var(--text-dark);
     }
     .section-title.white { color: var(--white); }
@@ -469,10 +478,11 @@
       font-style: normal; color: var(--orange);
     }
     .section-body {
-      font-size: 17px; line-height: 1.7;
+      font-size: 17px; line-height: 1.72;
       color: var(--text-muted); margin-top: 16px;
+      max-width: 62ch;
     }
-    .section-body.white { color: rgba(255,255,255,0.68); }
+    .section-body.white { color: rgba(255,255,255,0.72); line-height: 1.78; }
 
     /* ── TRUST BAR ── */
     .trust-bar {
@@ -536,20 +546,29 @@
 
     .service-item-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 27px; font-weight: 800;
+      font-size: 32px; font-weight: 900;
       color: var(--text-dark);
       line-height: 1.0;
       margin-bottom: 12px;
-      letter-spacing: -0.2px;
-      transition: color 0.22s ease;
+      letter-spacing: -0.3px;
+      transition: color 0.22s var(--ease-out-quart);
+      position: relative; display: inline-block;
     }
+    .service-item-name::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--orange);
+      transition: width 0.35s var(--ease-out-expo);
+    }
+    .service-item:hover .service-item-name::after { width: 100%; }
 
     .service-item:hover .service-item-name { color: var(--orange); }
 
     .service-item-desc {
-      font-size: 14.5px; line-height: 1.65;
+      font-size: 15px; line-height: 1.7;
       color: var(--text-muted);
-      flex: 1;
+      flex: 1; max-width: 50ch;
     }
 
     .service-item-tag {
@@ -635,8 +654,17 @@
       padding: 32px 0;
       align-items: start;
       border-bottom: 1px solid rgba(255,255,255,0.07);
-      transition: opacity 0.22s ease;
+      transition: opacity 0.22s var(--ease-out-quart);
+      position: relative;
     }
+    .why-row::before {
+      content: '';
+      position: absolute; left: -32px; top: 0; bottom: 0;
+      width: 3px; background: var(--gold);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+    .why-row:hover::before { transform: scaleY(1); }
 
     .why-rows .why-row:first-child {
       border-top: 1px solid rgba(255,255,255,0.07);
@@ -667,8 +695,8 @@
     .why-row:hover .why-row-title { color: var(--orange); }
 
     .why-row-body {
-      font-size: 14.5px; line-height: 1.65;
-      color: rgba(255,255,255,0.5);
+      font-size: 15px; line-height: 1.72;
+      color: rgba(255,255,255,0.55);
     }
 
     /* ── COVERAGE ── */
@@ -1033,18 +1061,30 @@
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 8px 28px rgba(37,211,102,0.5);
       z-index: 900; text-decoration: none;
-      transition: transform 0.3s, box-shadow 0.3s;
-      animation: waBounce 4s ease-in-out infinite;
+      transition: transform 0.25s var(--ease-out-quart), box-shadow 0.25s;
+    }
+    .wa-float::before {
+      content: '';
+      position: absolute; inset: -8px; border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.5);
+      animation: waRing 2.4s cubic-bezier(0.16,1,0.3,1) infinite;
+    }
+    .wa-float::after {
+      content: '';
+      position: absolute; inset: -16px; border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.25);
+      animation: waRing 2.4s cubic-bezier(0.16,1,0.3,1) 0.4s infinite;
+    }
+    @keyframes waRing {
+      0% { transform: scale(0.85); opacity: 0.8; }
+      100% { transform: scale(1.35); opacity: 0; }
     }
     .wa-float:hover {
-      transform: scale(1.12);
-      box-shadow: 0 14px 40px rgba(37,211,102,0.6);
+      transform: scale(1.1);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.65);
     }
+    .wa-float:active { transform: scale(0.96); transition-duration: 0.1s; }
     .wa-float svg { width: 30px; height: 30px; fill: white; }
-    @keyframes waBounce {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
     .wa-float-label {
       position: absolute; right: 72px; top: 50%;
       transform: translateY(-50%);
@@ -1234,14 +1274,29 @@
     @media (max-width: 480px) {
       .container { padding: 0 20px; }
       .hero-inner { padding: 40px 20px 100px; }
+      .hero-badge-row { gap: 8px; }
       .hero-actions { flex-direction: column; }
-      .btn-primary, .btn-secondary { justify-content: center; }
-      .cta-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary {
+        justify-content: center;
+        min-height: 52px;
+        font-size: 18px;
+      }
+      .cta-whatsapp, .cta-phone-btn {
+        min-height: 56px;
+        width: 100%; justify-content: center;
+      }
+      .cta-actions { flex-direction: column; align-items: stretch; }
       .steps-track { grid-template-columns: 1fr; }
       .steps-track::before { display: none; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
       .photo-strip { grid-template-columns: 1fr; }
       .social-btn { width: 100%; justify-content: center; }
+      .zone-card { padding: 18px 16px; }
+      .zone-card:active {
+        background: rgba(0,180,200,0.04);
+        border-color: rgba(0,180,200,0.3);
+      }
+      .hero-stats { gap: 16px; flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -1314,15 +1369,15 @@
         </div>
         <div class="hero-stats reveal delay-4">
           <div class="hero-stat">
-            <div class="hero-stat-num">8<span>★</span></div>
+            <div class="hero-stat-num"><span data-count="8">8</span><span>★</span></div>
             <div class="hero-stat-label">Años de aventura</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num"><span>+</span>500</div>
+            <div class="hero-stat-num"><span>+</span><span data-count="500">500</span></div>
             <div class="hero-stat-label">Servicios realizados</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num"><span>+</span>1000</div>
+            <div class="hero-stat-num"><span>+</span><span data-count="1000">1000</span></div>
             <div class="hero-stat-label">Clientes satisfechos</div>
           </div>
         </div>
@@ -1966,6 +2021,36 @@
 
       updateIcon();
     }
+
+    // ── COUNTER ANIMATION ──
+    function animateCounter(el, target, duration) {
+      const start = performance.now();
+      const initial = 0;
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4); // ease-out-quart
+        el.textContent = (target < 10 ? eased * target : Math.floor(eased * target));
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(update);
+    }
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = '1';
+          animateCounter(entry.target, +entry.target.dataset.count, 1400);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(el => counterObserver.observe(el));
+
+    // ── EASTER EGG ──
+    console.log('%c🐺 Lobo Viajero', 'font-size:22px; font-weight:900; color:#FFD24D;');
+    console.log('%cCada aventura empieza con un "¿a dónde vamos?"', 'font-size:13px; color:#00B4C8;');
+    console.log('%c¿Te interesa trabajar con nosotros? → 55 7985 4361', 'font-size:12px; color:#aaa;');
   </script>
 </body>
 </html>
